@@ -64,10 +64,22 @@ developing your own process.
 
   - How I debugged:
 
+Opening Console Tab and seeing it has a 500 internal Server Error that means easiest way to solve this is by using Rails Server log. 
+By checking on server log and following the instructions thrown by error to find where Name error was. Resolved by proper initialization of controller.
+
 - Update the number of likes for a toy
 
   - How I debugged:
 
+  From console tab found it is Uncaught (in promise) SyntaxError: Unexpected end of JSON input which mean you need to look at fetch request and controller action.
+  Start by adding a byebug in update contoller action. Then, enter some data in the form, and submit the form again to make another request. Use this as an opportunity to inspect the request object, in particular looking at the params hash. Then return JSON data in the response from your controller actions.
+
+
 - Donate a toy to Goodwill (and delete it from our database)
 
   - How I debugged:
+  Using console tab and found it is a DELETE http://localhost:4000/toys/49 404 (Not Found) error. By looking in Server log error found out it was ActionController::RoutingError (No route matches [DELETE] "/toys/1"). This mean that there is no route to perform DELETE action.
+  Added it in routes.rb(:destroy)
+
+
+
